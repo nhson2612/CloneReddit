@@ -1,0 +1,62 @@
+POST http://localhost:8080/api/auth/signup
+Content-Type: application/json
+
+{
+  "username": "{{$random.alphabetic()}}",
+  "password": "{{$random.alphabetic()}}",
+  "email": "nhson26122004@gmail.com"
+}
+
+### Login
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "nhson",
+  "password": "son26122004"
+}
+
+### create subreddit
+POST http://localhost:8080/api/subreddit
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaHNvbiIsImlhdCI6MTY5MTI5OTY2MSwiZXhwIjoxNjkxMzg2MDYxfQ.8SH8MVeMZjrvyBec5D6LSXJ-kARIZUN5B31j80vPQOQ
+
+{
+  "subredditName": "First subreddit",
+  "description": "{{$random.alphabetic(20)}}"
+}
+
+### create post
+POST http://localhost:8080/api/post
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaHNvbiIsImlhdCI6MTY5MTI5OTY2MSwiZXhwIjoxNjkxMzg2MDYxfQ.8SH8MVeMZjrvyBec5D6LSXJ-kARIZUN5B31j80vPQOQ
+
+{
+  "subredditName": "First subreddit",
+  "postName": "Post {{$random.alphabetic(5)}}",
+  "url": "google.com",
+  "description": "Nothing {{$random.integer(200)}}"
+}
+
+###get all post
+GET http://localhost:8080/api/post/all
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaHNvbiIsImlhdCI6MTY5MTI5OTY2MSwiZXhwIjoxNjkxMzg2MDYxfQ.8SH8MVeMZjrvyBec5D6LSXJ-kARIZUN5B31j80vPQOQ
+
+### create comment
+POST http://localhost:8080/api/comment
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaHNvbiIsImlhdCI6MTY5MTI5OTY2MSwiZXhwIjoxNjkxMzg2MDYxfQ.8SH8MVeMZjrvyBec5D6LSXJ-kARIZUN5B31j80vPQOQ
+Content-Type: application/json
+
+{
+  "postId": 4,
+  "text": "Comment {{$random.alphabetic(20)}}",
+  "username": "nhson"
+}
+
+### get all comment by post
+GET http://localhost:8080/api/comment/by-post/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaHNvbiIsImlhdCI6MTY5MTI5OTY2MSwiZXhwIjoxNjkxMzg2MDYxfQ.8SH8MVeMZjrvyBec5D6LSXJ-kARIZUN5B31j80vPQOQ
+
+### get all comment by user
+GET http://localhost:8080/api/comment/by-user/nhson
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaHNvbiIsImlhdCI6MTY5MTI5OTY2MSwiZXhwIjoxNjkxMzg2MDYxfQ.8SH8MVeMZjrvyBec5D6LSXJ-kARIZUN5B31j80vPQOQ
