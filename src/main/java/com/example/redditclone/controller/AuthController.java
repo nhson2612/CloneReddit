@@ -23,29 +23,33 @@ public class AuthController {
     @Autowired
     private AuthService authService;
     @PostMapping("/signup")
+    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity signup(@RequestBody RegisterRequest registerRequest) {
         authService.signup(registerRequest);
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
     @GetMapping("/accountVerification/{token}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<String> verificationAccount(@PathVariable("token") String token){
         authService.verificationToken(token);
         return new ResponseEntity<>("Your account activated !",HttpStatus.OK);
     }
 
     @PostMapping("/login")
-
+    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<AuthenticationResponse> login(@RequestBody LoginRequest loginRequest){
         AuthenticationResponse response =  authService.login(loginRequest);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
     @PostMapping("/refresh/token")
+    @CrossOrigin(origins = "http://localhost:4200")
     public AuthenticationResponse refreshToken(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest){
         return authService.refreshToken(refreshTokenRequest);
     }
     @PostMapping("/logout")
+    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity logout(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest){
         refreshTokenService.deleteRefreshToken(refreshTokenRequest.getRefreshToken());
         return new ResponseEntity(HttpStatus.NO_CONTENT);

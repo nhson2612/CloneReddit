@@ -17,12 +17,14 @@ public class SubredditController {
     private SubredditService subredditService;
 
     @PostMapping()
+    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<SubredditDto> createSubreddit(@RequestBody SubredditDto subredditDto){
         SubredditDto response = subredditService.saveSubreddit(subredditDto);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @GetMapping("/all")
+    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<List<SubredditDto>> showAllSubreddit(){
         List<SubredditDto> subredditDtos = subredditService.getAlllSubreddit();
         return new ResponseEntity<>(subredditDtos,HttpStatus.OK);
