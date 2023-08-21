@@ -4,6 +4,7 @@ import com.example.redditclone.dto.AuthenticationResponse;
 import com.example.redditclone.dto.LoginRequest;
 import com.example.redditclone.dto.RefreshTokenRequest;
 import com.example.redditclone.dto.RegisterRequest;
+import com.example.redditclone.excecption.AccountNotVerified;
 import com.example.redditclone.model.NotificationEmail;
 import com.example.redditclone.model.User;
 import com.example.redditclone.model.VerificationToken;
@@ -86,6 +87,8 @@ public class AuthService {
         if(userOptional.isEmpty()){
             throw new NoSuchElementException();
         }else{
+            if(userOptional.get().isEnabled() == true){
+
             SimpleGrantedAuthority authority = new SimpleGrantedAuthority("USER");
 
             Collection<GrantedAuthority> authorities = List.of(authority);
@@ -105,6 +108,10 @@ public class AuthService {
                     .exp(Instant.now().plusMillis(100*60*60*24))
                     .refreshToken(refreshTokenService.generateRefreshToken().getToken())
                     .build();
+            }else {
+                throw new AccountNotVerified("Account not verified , pls check email to verify my account");
+            }
+
         }
 
     }

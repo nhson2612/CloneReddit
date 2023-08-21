@@ -19,28 +19,28 @@ Content-Type: application/json
 ### create subreddit
 POST http://localhost:8080/api/subreddit
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaHNvbiIsImlhdCI6MTY5MTI5OTY2MSwiZXhwIjoxNjkxMzg2MDYxfQ.8SH8MVeMZjrvyBec5D6LSXJ-kARIZUN5B31j80vPQOQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaHNvbiIsImlhdCI6MTY5MTU1NTczNSwiZXhwIjoxNjkxNjQyMTM1fQ.i5esUwakfm8MnwX48QyGLbFv4ixu7nZ66H1RU2TGv_0
 
 {
-  "subredditName": "First subreddit",
+  "subredditName": "subreddit {{$random.alphanumeric(5)}}",
   "description": "{{$random.alphabetic(20)}}"
 }
 
 ### create post
 POST http://localhost:8080/api/post
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaHNvbiIsImlhdCI6MTY5MTI5OTY2MSwiZXhwIjoxNjkxMzg2MDYxfQ.8SH8MVeMZjrvyBec5D6LSXJ-kARIZUN5B31j80vPQOQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaHNvbiIsImlhdCI6MTY5MTU1NTczNSwiZXhwIjoxNjkxNjQyMTM1fQ.i5esUwakfm8MnwX48QyGLbFv4ixu7nZ66H1RU2TGv_0
 
 {
-  "subredditName": "First subreddit",
+  "subredditName": "subreddit vQmMR",
   "postName": "Post {{$random.alphabetic(5)}}",
-  "url": "google.com",
+  "url": "https://discord.com",
   "description": "Nothing {{$random.integer(200)}}"
 }
 
 ###get all post
 GET http://localhost:8080/api/post/all
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaHNvbiIsImlhdCI6MTY5MTI5OTY2MSwiZXhwIjoxNjkxMzg2MDYxfQ.8SH8MVeMZjrvyBec5D6LSXJ-kARIZUN5B31j80vPQOQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaHNvbiIsImlhdCI6MTY5MjU5MzYxNywiZXhwIjoxNjkyNjgwMDE3fQ.hx8lTU2xWnqpbGXtDvdrDZ5hM36ao4T1RWpPjZE-6x4
 
 ### create comment
 POST http://localhost:8080/api/comment
@@ -59,4 +59,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaHNvbiIsImlhdCI6MTY5MTI5O
 
 ### get all comment by user
 GET http://localhost:8080/api/comment/by-user/nhson
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaHNvbiIsImlhdCI6MTY5MTI5OTY2MSwiZXhwIjoxNjkxMzg2MDYxfQ.8SH8MVeMZjrvyBec5D6LSXJ-kARIZUN5B31j80vPQOQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaHNvbiIsImlhdCI6MTY5MjYwOTc5MCwiZXhwIjoxNjkyNjk2MTkwfQ.JyPiJk8tVeycUNnXI-T3cCvttTpe6LP-Tpo9-_MjQLU
+
+###  Vote
+POST http://localhost:8080/api/vote
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaHNvbiIsImlhdCI6MTY5MjYwOTc5MCwiZXhwIjoxNjkyNjk2MTkwfQ.JyPiJk8tVeycUNnXI-T3cCvttTpe6LP-Tpo9-_MjQLU
+Content-Type: application/json
+
+{
+  "voteType": "UPVOTE",
+  "postId": 3
+}

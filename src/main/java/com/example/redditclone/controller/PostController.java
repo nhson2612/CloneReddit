@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/post")
 public class PostController {
@@ -19,30 +20,26 @@ public class PostController {
     private PostService postService;
 
     @PostMapping()
-    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity createPost(@RequestBody PostRequest postRequest){
         postService.createPost(postRequest);
         return new ResponseEntity(HttpStatus.CREATED);
     }
     @GetMapping("/all")
-    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<List<PostResponse>> showAllPost(){
         List<PostResponse> posts = postService.getAllPost();
         return  new ResponseEntity<>(posts,HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<PostResponse> getPostById(@PathVariable("id")Long id){
         PostResponse postResponse = postService.getPostById(id);
         return new ResponseEntity<>(postResponse,HttpStatus.OK);
     }
 
-    @GetMapping()
-    @CrossOrigin(origins = "http://localhost:4200")
-    public ResponseEntity<List<PostResponse>> getAllPostBySubreddit(@RequestParam("sr") Long subredditId){
-        List<PostResponse> responses = postService.getAllPostBySubreddit(subredditId);
-        return new ResponseEntity<>(responses,HttpStatus.OK);
-    }
+//    @GetMapping()
+//    public ResponseEntity<List<PostResponse>> getAllPostBySubreddit(@RequestParam("sr") Long subredditId){
+//        List<PostResponse> responses = postService.getAllPostBySubreddit(subredditId);
+//        return new ResponseEntity<>(responses,HttpStatus.OK);
+//    }
 
 }

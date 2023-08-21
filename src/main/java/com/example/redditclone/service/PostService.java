@@ -8,6 +8,7 @@ import com.example.redditclone.model.Post;
 import com.example.redditclone.model.Subreddit;
 import com.example.redditclone.repository.PostsRepository;
 import com.example.redditclone.repository.SubredditRepository;
+import com.github.marlonlom.utilities.timeago.TimeAgo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,6 +57,7 @@ public class PostService {
     }
 
     private PostResponse mapPostToResponse(Post post){
+//        String duration = TimeAgo.using(post.getCreateDate().toEpochMilli());
         PostResponse response = PostResponse.builder()
                 .id(post.getPostId())
                 .postName(post.getPostName())
@@ -63,8 +65,8 @@ public class PostService {
                 .username(post.getUser().getUsername())
                 .url(post.getUrl())
                 .description(post.getDescription())
-//                .duration()
-//                .voteCount()
+//                .duration(TimeAgo.using(post.getCreateDate().toEpochMilli()))
+                .voteCount(post.getVoteCount())
                 .build();
         return response;
     }
